@@ -1,0 +1,128 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
+p {
+    font-size: 20px;
+    font-weight: 500;
+    font-family: fredoka;
+    color: #4D4D4D;
+}
+.headerContent {
+    position: absolute;
+    text-decoration: none;
+    z-index: 10;
+    margin-top: 1%;
+}
+.keyword{
+    font-weight: 600;
+    background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#settingsButton,#lockButton{
+  transition: all 0.25s cubic-bezier(0.1, -0.6, 0.2, 0);
+    &:hover{
+      transform: rotate(34deg)
+    }
+}
+/* Toggle Button */
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#toggle {
+  display: none;
+}
+
+.button {
+  position: absolute;
+  z-index: 1;
+  width: 35px;
+  height: 35px;
+  background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
+  border-radius: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 292px;
+
+  &:before {
+    position: absolute;
+    content: "";
+    width: 14px;
+    height: 3px;
+    background: #fff;
+    transform: rotate(90deg);
+    transition: all 0.4s ease;
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    width: 14px;
+    height: 3px;
+    background: #fff;
+    transition: all 0.4s ease;
+  }
+
+  /* &:hover{
+    background: linear-gradient(90deg, #E58A5C 0%, #E55558 100%);
+  } */
+}
+
+.nav {
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.1, -0.6, 0.2, 0);
+  background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
+  width: 250px;
+  border-radius: 8px;
+  transform: translateY(235%) translateX(-1.5%);
+  box-shadow: 2px 3px 10px 0 rgba(81, 81, 81, 0.1);
+  pointer-events: none;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    text-align: center;
+    margin: 0;
+    padding: 6px 0;
+    color: white;
+    text-decoration: none;
+    font-family: "Fredoka", sans-serif;
+    font-weight:500;
+    letter-spacing: 1px;
+    font-size: 12px;
+    border-bottom: 2px solid #fff;
+    
+    &:hover {
+      text-decoration:underline;
+    }
+    
+    &:last-child {
+    border-bottom: none;
+  }
+  }
+}
+
+#toggle:checked ~ .nav {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(230%) translateX(-1.5%);
+}
+
+#toggle:checked ~ .button:before {
+  transform: rotate(225deg);
+}
+
+#toggle:checked ~ .button:after {
+  transform: rotate(135deg);
+}

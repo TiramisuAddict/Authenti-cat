@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Import QR Code</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="importQR.css">
+    </head>
+    <body>
+        <div class="headerText">
+            <img src="/Ui_Elements/ImportQR/QRCodeIcon.svg" width="74">
+            <span class="text">Import <span class="keyword">QR code</span> image</span>
+        </div>
+
+        <div class="input_container">
+            <input type="file" accept="image/*" id="qrCodeInput">
+        </div>
+        <p>Please make sure the QR code is clear and visible for accurate scanning.</p>
+        <div class="subButton">
+            <button id="scanQRButton">Scan QR Code</button>
+        </div>
+
+        <script src="importQR.js"></script>
+    </body>
+</html>

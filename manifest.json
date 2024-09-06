@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Authenticat",
+    "version": "1.0",
+  
+    "description": "Authenticator browzer extention served by a kitty cat.",
+    "homepage_url": "https://github.com/TiramisuAddict",
+    "icons": {
+      "48": "icons/Authenticat-48.png"
+    },
+  
+    "permissions": ["activeTab"],
+  
+    "browser_action": {
+      "default_icon": "icons/Authenticat-32.png",
+      "default_title": "Authenticat",
+      "default_popup": "popup/index.html"
+    }
+  }

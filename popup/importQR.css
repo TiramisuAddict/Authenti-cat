@@ -1,0 +1,84 @@
+body{
+    font-family: fredoka;
+    color: #4D4D4D;
+}
+
+.text{
+    font-size: 48px;
+    max-height: fit-content;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+img{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.headerText{
+    max-width: fit-content;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.keyword{
+    font-weight: 600;
+    background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.input_container {
+    border: 1px solid #e5e5e5;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2%;
+}
+  
+input[type=file]::file-selector-button {
+    font-family: fredoka;
+    background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
+    color: white;
+    font-size: large;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+}
+  
+input[type=file]::file-selector-button:hover {
+    cursor:pointer;
+    background: linear-gradient(90deg, #E58A5C 0%, #E55558 100%);
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+}
+
+p{
+    text-align: center;
+}
+
+.subButton{
+    max-width: fit-content;
+    margin-inline: auto;
+    margin-top: 2%;
+}
+
+#scanQRButton{
+    font-family: fredoka;
+    background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 35px;
+
+    &:hover{
+        cursor: pointer;
+        background: linear-gradient(90deg, #E58A5C 0%, #E55558 100%);
+    }
+}
