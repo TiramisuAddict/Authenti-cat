@@ -1,3 +1,5 @@
+const secret = '';
+
 class URLData{
     constructor(serciveName,secret,issuer){
         this.serciveName = serciveName;
@@ -41,11 +43,25 @@ document.getElementById('scanQRButton').addEventListener('click', async () => {
             console.log(secretData.serciveName);
             console.log(secretData.secret);
             console.log(secretData.issuer);
+
+            //Generate TOTP token
+            
+            const totp = new OTPAuth.TOTP({
+                algorithm: 'SHA1',
+                digits: 6,
+                period: 30,
+                secret: secretData.secret,
+            })
+
+            const token = totp.generate();
+            console.log("Current token:", token);
+            localStorage.setItem("secretID",token);
         }else{
             console.log("Failed to extract secret key from QR code");
         }
     } else {
       alert("Failed to decode the QR code.");
+      //window.close();
     }
   });
   

@@ -5,22 +5,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+        
         <link rel="stylesheet" href="homepage.css">
+        <link rel="stylesheet" href="cards.css">
     </head>
     <body>
-        <header>
-            <a href="" class="headerContent" style="left: 84%;">
-                <img src="/Ui_Elements/Homepage/lock.svg" id="lockButton">
+        <header class="fixed-header">
+            <a href="" class="headerContent">
+                <img src="/Ui_Elements/Homepage/settings.svg" id="settingsButton">
             </a>
 
-            <a href="" class="headerContent" style="left: 92%;">
-                <img src="/Ui_Elements/Homepage/settings.svg" id="settingsButton">
+            <a href="" class="headerContent">
+                <img src="/Ui_Elements/Homepage/lock.svg" id="lockButton">
             </a>
         </header>
         
-        <div>
+        <div id="coolCards">
+
+        </div>
+
+        <div style="display: none;">
             <div>
-                <img src="/Ui_Elements/Homepage/vectorOne.svg" style="position: absolute; left: 185px; top: 7px;">
+                <img src="/Ui_Elements/Homepage/vectorOne.svg" style="position: absolute; left: 185px; top: 7px; z-index: 1001;">
                 <p style="position: absolute; left: 40px; top: 60px;">
                     Please make a <span class="keyword">password</span> <br> to <span class="keyword">encrypt</span> your data.
                 </p>
@@ -34,18 +40,19 @@
             </div>
         </div>
 
-        <footer>
-            <div class="container">
-                <input type="checkbox" id="toggle"/>
-                <label class="button" for="toggle"></label>
-                <nav class="nav">
-                <ul>
-                    <a href="" >Screenshot QR code</a>
-                    <a href="importQR.html" target="_blank">Import QR code image</a>
-                    <a href="" >Manual entry</a>
-                </ul>
-                </nav>
-            </div>
-        </footer>
+        <!-- Floating Button -->
+        <div class="container">
+            <input type="checkbox" id="toggle"/>
+            <label class="button" for="toggle"></label>
+            <nav class="nav">
+            <ul>
+                <a href="#" id="aa">Screenshot QR code</a>
+                <a href="importQR.html" target="_blank">Import QR code image</a>
+                <a href="#" >Manual entry</a>
+            </ul>
+            </nav>
+        </div>
+        
+        <script src="cards.js"></script>
     </body>
 </html>

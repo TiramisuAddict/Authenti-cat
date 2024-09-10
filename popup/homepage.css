@@ -1,37 +1,54 @@
-html, body {margin: 0; height: 100%; overflow: hidden}
-p {
-    font-size: 20px;
-    font-weight: 500;
-    font-family: fredoka;
-    color: #4D4D4D;
+html, body {margin: 0;}
+
+/*Fixed-nav*/
+
+.fixed-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
 }
+
 .headerContent {
-    position: absolute;
-    text-decoration: none;
-    z-index: 10;
-    margin-top: 1%;
+  text-decoration: none;
+  float: right;
+  margin-left: 7px;
 }
-.keyword{
-    font-weight: 600;
-    background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+
 #settingsButton,#lockButton{
   transition: all 0.25s cubic-bezier(0.1, -0.6, 0.2, 0);
     &:hover{
       transform: rotate(34deg)
     }
 }
-/* Toggle Button */
+
+/*Guide content*/
+
+.keyword{
+  font-weight: 600;
+  background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: fredoka;
+  color: #4D4D4D;
+}
+
+/* Toggle Button */ 
 
 .container {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: relative;
+  position: fixed;
+  bottom: -40px;
+  z-index: 1002;
 }
 
 #toggle {
@@ -49,7 +66,6 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 292px;
 
   &:before {
     position: absolute;
@@ -69,9 +85,9 @@ p {
     transition: all 0.4s ease;
   }
 
-  /* &:hover{
+  &:hover{
     background: linear-gradient(90deg, #E58A5C 0%, #E55558 100%);
-  } */
+  }
 }
 
 .nav {
@@ -80,7 +96,7 @@ p {
   background: var(--Orange-Coral, linear-gradient(74deg, #F96 9.88%, #FF5E62 88.27%));
   width: 250px;
   border-radius: 8px;
-  transform: translateY(235%) translateX(-1.5%);
+  transform: translateY(-100%) translateX(-1.5%);
   box-shadow: 2px 3px 10px 0 rgba(81, 81, 81, 0.1);
   pointer-events: none;
 
@@ -116,7 +132,7 @@ p {
 #toggle:checked ~ .nav {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(230%) translateX(-1.5%);
+  transform: translateY(-110%) translateX(-1.5%);
 }
 
 #toggle:checked ~ .button:before {

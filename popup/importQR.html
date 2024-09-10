@@ -6,7 +6,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="importQR.css">
-    </head>
+        
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'wasm-unsafe-eval' ">    </head>
     <body>
         <div class="headerText">
             <img src="/Ui_Elements/ImportQR/QRCodeIcon.svg" width="74">
@@ -21,6 +22,7 @@
             <button id="scanQRButton">Scan QR Code</button>
         </div>
 
-        <script src="importQR.js"></script>
+        <script src="otpauth.umd.min.js"></script>
+        <script type="module" src="importQR.js"></script>
     </body>
 </html>

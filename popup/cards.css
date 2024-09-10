@@ -1,0 +1,42 @@
+#coolCards {
+    margin-top: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.card {
+    display: flex;
+    padding: 10px;
+    margin-inline: auto;
+    background: linear-gradient(90deg, #FF9966 0%, #FF5E62 100%);
+    box-shadow: 0 4px 8px 0 rgb(54 50 164 / 20%);
+    width: 255px;
+    color: white;
+    border-radius: 13px;
+    font-family: fredoka;
+}
+
+#secret{
+    font-size: 24px;
+    font-weight: 550;
+}
+
+#timer{
+    font-size: 24px;
+    font-weight: 500;
+    padding-left: 12px;
+    padding-right: 8px;
+}
+
+#issuer{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#trashIcon{
+    width: 25px;
+    margin-inline: auto;
+}
