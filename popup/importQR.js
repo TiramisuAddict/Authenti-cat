@@ -66,7 +66,7 @@ document.getElementById('scanQRButton').addEventListener('click', async () => {
     const response = await fetch('https://api.qrserver.com/v1/read-qr-code/', {
       method: 'POST',
       body: formData
-    });
+    }); 
   
     const result = await response.json();
   
@@ -79,7 +79,7 @@ document.getElementById('scanQRButton').addEventListener('click', async () => {
       const newAccountData = extractDataFromQRCode(qrData);
 
       if(newAccountData.secret){
-          //Save new account data
+
           saveAccountData(newAccountData);
 
           window.close();

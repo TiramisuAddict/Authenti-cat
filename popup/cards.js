@@ -13,81 +13,105 @@ function generateTOTP(accountData){
       secret: accountData.secret,
       period: 30
     });
-    return totp;
+    return totp.generate();
 }
 
-function updateTimer(){
-    const timer = document.getElementsByClassName('timer');
+function TOTP_Timer(time_difference){
+    const local_Time = Math.floor(new Date().getTime()/1000.0);
+    const time_counter = Math.floor((local_Time - time_difference)/30);
 
-    const current_time = Math.floor(new Date().getTime()/1000);
-    const interval_counter = Math.floor(current_time/30);
-    const interval_time_start = interval_counter * 30;
-    const interval_time_end = interval_time_start + 30;
-    const token_expiration_time = interval_time_end - current_time;
-
-    for (var i = 0; i < timer.length; i++){
-        timer[i].innerHTML = token_expiration_time+"s";
+    const a = document.getElementsByClassName('timer');
+    for (let i = 0; i < a.length; i++){
+        a[i].innerHTML = ((time_counter * 30) + 30) - local_Time;
     }
 }
 
-function createCard(){
-    const container = document.getElementById('coolCards');
-    for (var i = 0; i < accountsList.length; i++){
-        const card = document.createElement("div");
-        card.className = "card-body";
-        
-        const content = `
-            <div class="card" id="card${i}">
+async function calculate_time_drift(){
+    const response = await fetch('http://worldtimeapi.org/api/ip', {
+        method: 'GET',
+    });
     
-                <table border="0">
-                    <tr>
-                        <td id="issuer">${accountsList[i].label.substr(7,accountsList[i].label.length)}</td>
-                        <td rowspan="2" class="timer">${token_expiration_time}s</td>
-                        <td rowspan="2">
-                            <button id="deleteBtn${i}"> <img id="trashIcon" src="/Ui_Elements/Homepage/trash.svg"> </button>
-                        </td>
-                    </tr>
-    
-                    <tr>
-                        <td id="secret">${generateTOTP(accountsList[i]).generate()}</td>
-                    </tr>
-                </table>
-                
-            </div>
-            `;
-        
-        container.innerHTML += content;
+    const result = await response.json();
+    let timeDiff = result.unixtime - Math.floor(new Date().getTime()/1000.0);
+    console.log("Time Difference:",timeDiff);
+
+    if(timeDiff === -1){
+        return 0;
+    }else{
+        return timeDiff;
     }
 }
 
-function deleteCard(cardID){
-    document.getElementById(cardID).remove();
+function getQuickTime(){
+    return (( (Math.floor((Math.floor(new Date().getTime()/1000.0))/30)) * 30) + 30) - (Math.floor(new Date().getTime()/1000.0));
 }
 
-//Initial time Calculations
+//=======================================================================================================//
+localStorage.setItem("haveAccount",true);
+var accountsList = loadAccountsList();
 
-const current_time = Math.floor(new Date().getTime()/1000);
-const interval_counter = Math.floor(current_time/30);
-const interval_time_start = interval_counter * 30;
-const interval_time_end = interval_time_start + 30;
-const token_expiration_time = interval_time_end - current_time;
-
-const accountsList = loadAccountsList();
 if(accountsList.length != 0){
-    document.addEventListener('DOMContentLoaded',createCard);
+    document.addEventListener('DOMContentLoaded',async function() {
+        const container = document.getElementById('coolCards');
+        for (var i = 0; i < accountsList.length; i++){
+            const card = document.createElement("div");
+            card.className = "card-body";
+            
+            const content = `
+                <div class="card" id="card${i}">
+        
+                    <table border="0">
+                        <tr>
+                            <td id="issuer" colspan="3"> ${accountsList[i].issuer +" : "+accountsList[i].label.substr(accountsList[i].label.indexOf(":")+1,accountsList[i].label.length)}</td>
+                        </tr>
+
+                        <tr">
+                            <td width="170px"> <div id="token${i}" class="tokens"> ${generateTOTP(accountsList[i])} </div> </td>
+                            <td width="35px"> <div class="timer">${getQuickTime()}</div> </td>
+                            <td>
+                                <button class="delBtn" id="deleteBtn${i}"> <img id="trashIcon" src="/Ui_Elements/Homepage/trash.svg"> </button>
+                            </td>
+                        </tr>
+
+                    </table>
+                    
+                </div>
+                `;
+            
+            container.innerHTML += content;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        for (let i = 0; i < accountsList.length; i++) {
+            (function(i) {
+                const deleteButton = document.getElementById(`deleteBtn${i}`);
+                if (deleteButton) {
+                    deleteButton.addEventListener('click', function() {
+                        document.getElementById(`card${i}`).remove();
+                        accountsList.splice(i, 1);
+                        localStorage.setItem('accountsList', JSON.stringify(accountsList));
+                    });
+                }
+            })(i);
+        }
+    });
+
+    calculate_time_drift().then(gap => {
+        document.addEventListener('DOMContentLoaded', () => TOTP_Timer(gap));
+        setInterval(function() {
+            TOTP_Timer(gap);
+        }, 1000);
+    });
+
+    setInterval(function() {
+        for (let i = 0; i < accountsList.length; i++) {
+            document.getElementById(`token${i}`).innerHTML = generateTOTP(accountsList[i]);
+        }
+        console.log("Updated Tokens");
+    }, 1000);
+
+}else{
+    console.log("MAFAMA CHAY");
+    localStorage.setItem("haveAccount",false);
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    for (var i=0;i<accountsList.length;i++){
-        (function(i){
-            const deleteButton = document.getElementById(`deleteBtn${i}`);
-            if(deleteButton){
-                deleteButton.addEventListener('click',function(){
-                    deleteCard(`card${i}`);
-                });
-            }
-        })(i);
-    }
-});
-
-setInterval(updateTimer,1);

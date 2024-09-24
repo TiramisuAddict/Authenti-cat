@@ -19,24 +19,34 @@
     font-family: fredoka;
 }
 
-#secret{
-    font-size: 24px;
-    font-weight: 550;
-}
-
 .timer{
+    text-align: center;
     font-size: 24px;
     font-weight: 500;
-    padding-left: 12px;
-    padding-right: 8px;
+}
+
+.tokens{
+    font-size: 32px;
 }
 
 #issuer{
     font-size: 14px;
     font-weight: 500;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal
 }
 
 #trashIcon{
     width: 25px;
+}
+
+.delBtn{
+    background-color: #ffffff00;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
     margin-inline: auto;
 }
