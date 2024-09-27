@@ -1,18 +1,10 @@
-localStorage.setItem("userIsSafe",true); //Temporary line
+function guideHandler(status , elementID){
+    if(status == "true") document.getElementById(elementID).style.display = "none";
+    else document.getElementById(elementID).style.display = "flex";
+}
+
+const havePassword = localStorage.getItem("userIsSafe");
+guideHandler(havePassword, "securityGuide");
 
 const adddedAccount = localStorage.getItem("haveAccount");
-const havePassword = localStorage.getItem("userIsSafe");
-
-if(havePassword == "true" && adddedAccount == "true"){
-    localStorage.setItem("userGuided",true);
-}else{
-    localStorage.setItem("userGuided",false);
-}
-
-const safeUser = localStorage.getItem("userGuided");
-
-if(safeUser === "true"){
-    document.getElementById("userGuide").style.display = "none";
-}else{
-    document.getElementById("userGuide").style.display = "flex";
-}
+guideHandler(adddedAccount, "accountGuide");

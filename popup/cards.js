@@ -16,6 +16,10 @@ function generateTOTP(accountData){
     return totp.generate();
 }
 
+function getQuickTime(){
+    return (( (Math.floor((Math.floor(new Date().getTime()/1000.0))/30)) * 30) + 30) - (Math.floor(new Date().getTime()/1000.0));
+}
+
 function TOTP_Timer(time_difference){
     const local_Time = Math.floor(new Date().getTime()/1000.0);
     const time_counter = Math.floor((local_Time - time_difference)/30);
@@ -42,17 +46,23 @@ async function calculate_time_drift(){
     }
 }
 
-function getQuickTime(){
-    return (( (Math.floor((Math.floor(new Date().getTime()/1000.0))/30)) * 30) + 30) - (Math.floor(new Date().getTime()/1000.0));
+function showSnackbar() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", "hide"); }, 3000);
 }
 
 //=======================================================================================================//
+
+localStorage.setItem("userIsSafe",false); //Temporary line
+
 localStorage.setItem("haveAccount",true);
 var accountsList = loadAccountsList();
 
 if(accountsList.length != 0){
+    localStorage.setItem("userIsSafe",true); //overlay
     document.addEventListener('DOMContentLoaded',async function() {
-        const container = document.getElementById('coolCards');
+        const container = document.getElementById('cardContainer');
         for (var i = 0; i < accountsList.length; i++){
             const card = document.createElement("div");
             card.className = "card-body";
@@ -108,10 +118,19 @@ if(accountsList.length != 0){
         for (let i = 0; i < accountsList.length; i++) {
             document.getElementById(`token${i}`).innerHTML = generateTOTP(accountsList[i]);
         }
-        console.log("Updated Tokens");
     }, 1000);
 
+    document.addEventListener("DOMContentLoaded",function(){
+        for(let i = 0; i<accountsList.length ; i++){
+            document.getElementById(`token${i}`).addEventListener("click",function(){
+                const token = generateTOTP(accountsList[i]);
+                navigator.clipboard.writeText(token.toString());
+                console.log("Token copied");
+                showSnackbar();
+            });
+        }
+    });
+    
 }else{
-    console.log("MAFAMA CHAY");
     localStorage.setItem("haveAccount",false);
 }
