@@ -24,9 +24,9 @@ function TOTP_Timer(time_difference){
     const local_Time = Math.floor(new Date().getTime()/1000.0);
     const time_counter = Math.floor((local_Time - time_difference)/30);
 
-    const a = document.getElementsByClassName('timer');
-    for (let i = 0; i < a.length; i++){
-        a[i].innerHTML = ((time_counter * 30) + 30) - local_Time;
+    const timerConst = document.getElementsByClassName('timer');
+    for (let i = 0; i < timerConst.length; i++){
+        timerConst[i].innerHTML = ((time_counter * 30) + 30) - local_Time;
     }
 }
 
