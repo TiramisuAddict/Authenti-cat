@@ -1,10 +1,11 @@
 class Account{
-    constructor(label,issuer,secret,algorithm,digits){
+    constructor(label,issuer,secret,algorithm,digits,period){
         this.label = label;
         this.issuer = issuer;
         this.secret = secret;
         this.algorithm = algorithm;
         this.digits = digits;
+        this.period = period;
     }
 }
 
@@ -21,22 +22,17 @@ function extractDataFromQRCode(qrData) {
       var algorithm = 'SHA1';
     }
 
-    var digits = url.searchParams.get("digits");
+    var digits = parseInt(url.searchParams.get("digits"), 10);
     if(!digits){
       var digits = 6;
     }
 
-    return new Account(label,issuer,secret,algorithm,digits);
-}
+    var period = parseInt(url.searchParams.get("period"), 10);
+    if(!period){
+      var period = 30;
+    }
 
-function generateTOTP(accountData){
-  const totp = new OTPAuth.TOTP({
-    algorithm: accountData.algorithm,
-    digits: accountData.digits,
-    secret: accountData.secret,
-    period: 30
-  });
-  return totp;
+    return new Account(label,issuer,secret,algorithm,digits,period);
 }
 
 function saveAccountData(accountData){
