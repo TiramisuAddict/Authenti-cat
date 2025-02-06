@@ -7,7 +7,6 @@ function loadAccountsList(){
 }
 
 function periodsList(){
-    var list = localStorage.getItem('accountsList');
     pList = [];
     for (var i = 0; i < accountsList.length; i++)
         pList.push(accountsList[i].period);
